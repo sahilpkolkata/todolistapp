@@ -1,0 +1,25 @@
+<form class="form" (submit)="add(todoText.value); todoText.value='' ">
+    <div class="form-group">
+        <input placeholder="Add Your Tasks" #todoText type="text" class="form-control">
+    </div>
+    <input type="submit" value="Submit" class="btn btn-success btn-lg btn-block">
+</form>
+
+<table class="table">
+    <tr *ngFor="let todo of todos"> 
+        <td class="text-left">
+            <a (click)="edit(todo)">
+                <span *ngIf="todo!==editTodo"><strong>{{todo.text.toUpperCase()}}</strong></span>
+                <input *ngIf="todo===editTodo" [(ngModel)]="todo.text" (blur)="update()" (keyup.enter)="update()">
+            </a>
+        </td>
+        <td class="text-right">
+            <button class="btn btn-danger" title="delete todo" (click)="delete(todo)">Delete</button>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <span> * Click on the Tasks to Edit and Press anywhere to Update.</span><br>
+    <span> * Press Enter to Add your Tasks. </span>
+</div>
